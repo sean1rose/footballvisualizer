@@ -1,6 +1,9 @@
 // npm run start && npm run build
-const greeting = (name) => {
-	console.log(`Hello, ${name}!`);;
-};
+import React from "react";
+import ReactDOM from 'react-dom';
+import Greeting from './greeting';
 
-greeting('world');
+ReactDOM.render(
+	<Greeting name="Sean Rose" />,
+	document.getElementById('container')
+);
