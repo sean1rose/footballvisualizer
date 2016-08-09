@@ -1,9 +1,17 @@
-// npm run start && npm run build
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Greeting from './greeting';
+
+class App extends React.Component {
+	render() {
+		return (
+			<div>
+				<p>Hi</p>
+			</div>
+		);
+	}
+}
 
 ReactDOM.render(
-	<Greeting name="Sean Rose" />,
+	<App />,
 	document.getElementById('container')
-);
+)
