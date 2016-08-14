@@ -1,24 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchBar from './components/SearchBar';
-import SpotifyWebApi from 'spotify-web-api-node';
+import AlbumList from './components/AlbumList';
+import * as musicApi from './api/musicApi';
 
+
+/*
+import SpotifyWebApi from 'spotify-web-api-node';
 const scopes = ['user-read-private', 'user-read-email'];
 const redirectUri = 'http://localhost:8080/callback';
 const clientId = 'bb5ef2b0db1d4d20984eca962452b2c3';
 const state = 'CA';
 const spotifyApi = new SpotifyWebApi();
 
-/*
-const spotifyApi = new SpotifyWebApi({
-  redirectUri: redirectUri,
-  clientId: clientId
-});
+// const spotifyApi = new SpotifyWebApi({
+//   redirectUri: redirectUri,
+//   clientId: clientId
+// });
 
 const authorizeUrl = spotifyApi.createAuthorizeURL(scopes, state);
 
 console.log('authorizeUrl - ', authorizeUrl);
-*/
 
 spotifyApi.getAlbumTracks('392p3shh2jkxUxY2VHvlH8')
   .then((data) => {
@@ -30,13 +32,34 @@ spotifyApi.getAlbumTracks('392p3shh2jkxUxY2VHvlH8')
   }, (err) => {
     console.log('error! - ', err);
   });
+*/
+
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = ({
+      albums: [],
+    });
+    this.getAlbums = this.getAlbums.bind(this);
+    this.processAlbums = this.processAlbums.bind(this);
+  }
+
+  getAlbums(artist) {
+    musicApi.getAlbums(artist, this.processAlbums);
+  }
+
+  processAlbums(payload) {
+    this.setState({
+      albums: payload.albums.items,
+    });
+  }
+
   render() {
     return (
       <div>
-        <p>Hi</p>
-        <SearchBar />
+        <SearchBar getAlbums={this.getAlbums} />
+        <AlbumList albums={this.state.albums} />
       </div>
     );
   }

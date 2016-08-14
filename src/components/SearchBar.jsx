@@ -1,3 +1,4 @@
+// stateful component that tracks internal state, has a render method, implements other methods
 import React from 'react';
 
 class SearchBar extends React.Component {
@@ -10,6 +11,7 @@ class SearchBar extends React.Component {
       searchTerm: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleInputChange(event) {
@@ -19,9 +21,19 @@ class SearchBar extends React.Component {
     });
   }
 
-  render() {
-    return <input onChange={this.handleInputChange} />;
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      this.props.getAlbums(this.state.searchTerm);
+    }
   }
+
+  render() {
+    return <input onChange={this.handleInputChange} onKeyPress={this.handleKeyPress} />;
+  }
+}
+
+SearchBar.propTypes = {
+  getAlbums: React.PropTypes.func.isRequired,
 }
 
 export default SearchBar;
