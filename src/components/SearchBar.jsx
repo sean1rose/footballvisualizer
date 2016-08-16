@@ -24,6 +24,7 @@ class SearchBar extends React.Component {
   handleKeyPress(event) {
     if (event.key === 'Enter') {
       this.props.getAlbums(this.state.searchTerm);
+      // this.props.getPlayers();
     }
   }
 
@@ -34,6 +35,7 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   getAlbums: React.PropTypes.func.isRequired,
+  // getPlayers: React.PropTypes.func.isRequired
 }
 
 export default SearchBar;

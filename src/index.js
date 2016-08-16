@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchBar from './components/SearchBar';
 import AlbumList from './components/AlbumList';
+import PlayerList from './components/PlayerList';
 import * as musicApi from './api/musicApi';
+import * as fantasyApi from './api/fantasyApi';
 
 
 /*
@@ -40,14 +42,22 @@ class App extends React.Component {
     super();
     this.state = ({
       albums: [],
+      // players: [],
     });
     this.getAlbums = this.getAlbums.bind(this);
     this.processAlbums = this.processAlbums.bind(this);
+
+    // this.getPlayers = this.getPlayers.bind(this);
+    // this.processPlayers = this.processPlayers.bind(this);
   }
 
   getAlbums(artist) {
     musicApi.getAlbums(artist, this.processAlbums);
   }
+
+  // getPlayers() {
+  //   fantasyApi.getPlayers(this.processPlayers);
+  // }
 
   processAlbums(payload) {
     this.setState({
@@ -55,11 +65,21 @@ class App extends React.Component {
     });
   }
 
+  // processPlayers(payload) {
+  //   this.setState({
+  //     players: payload,
+  //   })
+  // }
+
   render() {
     return (
       <div>
-        <SearchBar getAlbums={this.getAlbums} />
-        <AlbumList albums={this.state.albums} />
+       <SearchBar getAlbums={this.getAlbums} />
+       <AlbumList albums={this.state.albums} />
+        {/*
+        <SearchBar getPlayers={this.getPlayers} />
+        <PlayerList players={this.state.players} />
+        */}
       </div>
     );
   }
