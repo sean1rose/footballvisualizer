@@ -70,6 +70,7 @@ class App extends React.Component {
   processAlbums(payload) {
     this.setState({
       albums: payload.albums.items,
+      tracks: [],
     });
   }
 

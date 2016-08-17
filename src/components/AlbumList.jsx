@@ -17,6 +17,7 @@ const AlbumList = (props) => {
 
 AlbumList.propTypes = {
   albums: React.PropTypes.array.isRequired,
+  getTracks: React.PropTypes.func.isRequired,
 };
 
 AlbumList.styles = {
