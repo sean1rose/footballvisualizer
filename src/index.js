@@ -44,12 +44,14 @@ class App extends React.Component {
     this.state = ({
       albums: [],
       tracks: [],
+      currentPreview: null,
       // players: [],
     });
     this.getAlbums = this.getAlbums.bind(this);
     this.processAlbums = this.processAlbums.bind(this);
     this.getTracks = this.getTracks.bind(this);
     this.processTracks = this.processTracks.bind(this);
+    this.playPreview = this.playPreview.bind(this);
 
     // this.getPlayers = this.getPlayers.bind(this);
     // this.processPlayers = this.processPlayers.bind(this);
@@ -80,6 +82,22 @@ class App extends React.Component {
     })
   }
 
+  playPreview(previewUrl) {
+    // if already playing, then pause...
+    if (this.state.currentPreview) {
+      const curAudioObject = this.state.currentPreview;
+      curAudioObject.pause();
+    }
+
+    // create html5 audio obj using the song-preview-url
+    const newAudioObject = new Audio(previewUrl);
+    // set it as the current state
+    this.setState({
+      currentPreview: newAudioObject,
+    });
+    // finally play the preview
+    newAudioObject.play();
+  }
   // processPlayers(payload) {
   //   this.setState({
   //     players: payload,
@@ -91,7 +109,7 @@ class App extends React.Component {
       <div>
        <SearchBar getAlbums={this.getAlbums} />
        <AlbumList albums={this.state.albums} getTracks={this.getTracks} />
-       <TrackList tracks={this.state.tracks} />
+       <TrackList tracks={this.state.tracks} playPreview={this.playPreview}/>
         {/*
         <SearchBar getPlayers={this.getPlayers} />
         <PlayerList players={this.state.players} />
