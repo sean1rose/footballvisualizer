@@ -1,5 +1,5 @@
 {
-  "name": "respotify",
+  "name": "footballvisualizer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -30,7 +30,6 @@
   "dependencies": {
     "axios": "^0.13.1",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "spotify-web-api-node": "^2.3.5"
+    "react-dom": "^15.3.0"
   }
 }
