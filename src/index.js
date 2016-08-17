@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import SearchBar from './components/SearchBar';
 import AlbumList from './components/AlbumList';
 import PlayerList from './components/PlayerList';
+import TrackList from './components/TrackList';
 import * as musicApi from './api/musicApi';
 import * as fantasyApi from './api/fantasyApi';
 
@@ -42,10 +43,13 @@ class App extends React.Component {
     super();
     this.state = ({
       albums: [],
+      tracks: [],
       // players: [],
     });
     this.getAlbums = this.getAlbums.bind(this);
     this.processAlbums = this.processAlbums.bind(this);
+    this.getTracks = this.getTracks.bind(this);
+    this.processTracks = this.processTracks.bind(this);
 
     // this.getPlayers = this.getPlayers.bind(this);
     // this.processPlayers = this.processPlayers.bind(this);
@@ -53,6 +57,10 @@ class App extends React.Component {
 
   getAlbums(artist) {
     musicApi.getAlbums(artist, this.processAlbums);
+  }
+
+  getTracks(albumId) {
+    musicApi.getTracks(albumId, this.processTracks);
   }
 
   // getPlayers() {
@@ -65,6 +73,12 @@ class App extends React.Component {
     });
   }
 
+  processTracks(payload) {
+    this.setState({
+      tracks: payload.tracks.items,
+    })
+  }
+
   // processPlayers(payload) {
   //   this.setState({
   //     players: payload,
@@ -75,7 +89,8 @@ class App extends React.Component {
     return (
       <div>
        <SearchBar getAlbums={this.getAlbums} />
-       <AlbumList albums={this.state.albums} />
+       <AlbumList albums={this.state.albums} getTracks={this.getTracks} />
+       <TrackList tracks={this.state.tracks} />
         {/*
         <SearchBar getPlayers={this.getPlayers} />
         <PlayerList players={this.state.players} />

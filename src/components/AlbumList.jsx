@@ -4,7 +4,7 @@ import React from 'react';
 import Album from './Album';
 
 const AlbumList = (props) => {
-  const albums = props.albums.map((album) => <Album key={album.id} album={album} />);
+  const albums = props.albums.map((album) => <Album key={album.id} album={album} getTracks={props.getTracks} />);
 
   return (
     <div className="col-md-4" style={AlbumList.styles.div}>
