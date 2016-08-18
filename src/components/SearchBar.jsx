@@ -1,5 +1,6 @@
 // stateful component that tracks internal state, has a render method, implements other methods
 import React from 'react';
+import * as fantasyApi from '../api/fantasyApi';
 
 class SearchBar extends React.Component {
   // declare constructor func, pass it the component's props
@@ -9,6 +10,7 @@ class SearchBar extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
+      searchedPlayer: {},
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -21,12 +23,31 @@ class SearchBar extends React.Component {
     });
   }
 
+
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      // this.props.getAlbums(this.state.searchTerm);
+      console.log('search - ', this.state.searchTerm);
+      const firstName = this.state.searchTerm.split(" ")[0].toLowerCase();
+      const lastName = this.state.searchTerm.split(" ")[1].toLowerCase();
+      console.log(firstName + lastName);
       this.props.getPlayers();
+      // split name
+
+      // fantasyApi.getPlayers(this.processPlayers);
+
+      fantasyApi.getPlayer(firstName, lastName)
+        .then(dataObj => {
+          // set player obj as state
+          this.setState({
+            searchedPlayer: dataObj
+          });
+          console.log('1state - ', this.state.searchedPlayer);
+          this.props.getPlayer(dataObj);
+        })
+
     }
   }
+
 
   render() {
     return (
@@ -43,8 +64,8 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
-  // getAlbums: React.PropTypes.func.isRequired,
-  getPlayers: React.PropTypes.func.isRequired
+  getPlayers: React.PropTypes.func.isRequired,
+  getPlayer: React.PropTypes.func.isRequired,
 };
 
 SearchBar.styles = {
