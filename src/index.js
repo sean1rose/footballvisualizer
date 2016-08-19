@@ -60,7 +60,7 @@ class App extends React.Component {
     return (
       <div>        
         <SearchBar getPlayers={this.getPlayers} getPlayer={this.getPlayer} getPlayerData={this.getPlayerData}/>
-        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} searchedPlayerData={this.state.searchedPlayerData} />
+        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} searchedPlayerData={this.state.searchedPlayerData[0]} />
       </div>
     );
   }

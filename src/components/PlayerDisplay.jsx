@@ -9,7 +9,6 @@ const PlayerDisplay = (props) => {
   console.log('props.searchedPlayerData - ', playerData);
   return (
 		<div style={PlayerDisplay.styles.div}>
-			
 			<h4 style={PlayerDisplay.styles.h}>
 				Name: {player.Name}
 			</h4>
