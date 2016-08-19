@@ -42,3 +42,17 @@ export function getPlayer(firstName, lastName) {
     })
 }
 
+export function getPlayerData(playerId) {
+  const request = `https://api.fantasydata.net/v3/nfl/stats/JSON /Player/${playerId}`
+  const config = {
+    headers: {
+      'Ocp-Apim-Subscription-Key': '0302b5d54fb14225895de4f49c09b210'
+    }
+  };
+  return axios.get(request, config)
+    .then(response => {
+      console.log('in getPlayerData API call - ', response);
+      const searchedPlayerData = response.data;
+      return searchedPlayerData;
+    })
+}

@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = ({
       players: [],
       searchedPlayer: {},
+      searchedPlayerData: {},
     });
 
 
@@ -19,6 +20,7 @@ class App extends React.Component {
     this.processPlayers = this.processPlayers.bind(this);
     this.processSearchedPlayer = this.processSearchedPlayer.bind(this)
     this.getPlayer = this.getPlayer.bind(this);
+    this.getPlayerData = this.getPlayerData.bind(this);
   }
 
   getPlayer(player) {
@@ -31,6 +33,13 @@ class App extends React.Component {
 
   getPlayers() {
     fantasyApi.getPlayers(this.processPlayers);
+  }
+
+  getPlayerData(player) {
+    this.setState({
+      searchedPlayerData: player
+    });
+    console.log('searchedPlayerData in index.js - ', player, this.state);
   }
 
   processSearchedPlayer(payload) {
@@ -50,8 +59,8 @@ class App extends React.Component {
   render() {
     return (
       <div>        
-        <SearchBar getPlayers={this.getPlayers} getPlayer={this.getPlayer} />
-        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} />
+        <SearchBar getPlayers={this.getPlayers} getPlayer={this.getPlayer} getPlayerData={this.getPlayerData}/>
+        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} searchedPlayerData={this.state.searchedPlayerData} />
       </div>
     );
   }

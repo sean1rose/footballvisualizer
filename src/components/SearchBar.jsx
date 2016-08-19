@@ -11,6 +11,7 @@ class SearchBar extends React.Component {
     this.state = {
       searchTerm: '',
       searchedPlayer: {},
+      searchedPlayerData: {},
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -43,7 +44,19 @@ class SearchBar extends React.Component {
           });
           console.log('1state - ', this.state.searchedPlayer);
           this.props.getPlayer(dataObj);
-        })
+
+          fantasyApi.getPlayerData(dataObj.PlayerID)
+            .then(response => {
+              console.log('searchBar getPlayerData call response - ', response);
+              this.setState({
+                searchedPlayerData: response,
+              });
+              console.log('!!!state in search bar after call - ', this.state);
+              this.props.getPlayerData(response);
+            })
+
+
+        });
 
     }
   }
@@ -66,11 +79,11 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   getPlayers: React.PropTypes.func.isRequired,
   getPlayer: React.PropTypes.func.isRequired,
+  getPlayerData: React.PropTypes.func.isRequired,
 };
 
 SearchBar.styles = {
   div: {
-    margin: 30,
     textAlign: 'center',
   },
   input: {
