@@ -42,10 +42,10 @@ export function getPlayer(firstName, lastName) {
     })
 }
 
-export function getPlayerData(playerId) {
+export function getPlayerData(playerId, year) {
   // const request = `https://api.fantasydata.net/v3/nfl/stats/JSON/Player/${playerId}`
   // 2015 reg season stats
-  const request = `https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerSeasonStatsByPlayerID/2015REG/${playerId}`
+  const request = `https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerSeasonStatsByPlayerID/${year}/${playerId}`
   const config = {
     headers: {
       'Ocp-Apim-Subscription-Key': '0302b5d54fb14225895de4f49c09b210'

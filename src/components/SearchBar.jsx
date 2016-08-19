@@ -45,7 +45,7 @@ class SearchBar extends React.Component {
           console.log('1state - ', this.state.searchedPlayer);
           this.props.getPlayer(dataObj);
 
-          fantasyApi.getPlayerData(dataObj.PlayerID)
+          fantasyApi.getPlayerData(dataObj.PlayerID, '2015REG')
             .then(response => {
               console.log('searchBar getPlayerData call response - ', response);
               this.setState({
