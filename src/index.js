@@ -41,7 +41,7 @@ class App extends React.Component {
     this.setState({
       searchedPlayerData: player
     });
-    // console.log('searchedPlayerData in index.js - ', player, this.state);
+    console.log('searchedPlayerData in index.js - ', player, this.state);
   }
 
   getTopWideReceiversAverage(average) {
