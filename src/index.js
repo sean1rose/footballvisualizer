@@ -13,6 +13,7 @@ class App extends React.Component {
       players: [],
       searchedPlayer: {},
       searchedPlayerData: {},
+      topWrAverage: {},
     });
 
 
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.processSearchedPlayer = this.processSearchedPlayer.bind(this)
     this.getPlayer = this.getPlayer.bind(this);
     this.getPlayerData = this.getPlayerData.bind(this);
+    this.getTopWideReceiversAverage = this.getTopWideReceiversAverage.bind(this);
   }
 
   getPlayer(player) {
@@ -28,7 +30,7 @@ class App extends React.Component {
     this.setState({
       searchedPlayer: player
     });
-    console.log('THISSSSSS - ', player, this.state);
+    // console.log('THISSSSSS - ', player, this.state);
   }
 
   getPlayers() {
@@ -39,7 +41,14 @@ class App extends React.Component {
     this.setState({
       searchedPlayerData: player
     });
-    console.log('searchedPlayerData in index.js - ', player, this.state);
+    // console.log('searchedPlayerData in index.js - ', player, this.state);
+  }
+
+  getTopWideReceiversAverage(average) {
+    this.setState({
+      topWrAverage: average
+    });
+    console.log('getTopWideReceiversAverage + this.state in index.js - ', average, this.state);
   }
 
   processSearchedPlayer(payload) {
@@ -52,15 +61,15 @@ class App extends React.Component {
     this.setState({
       players: payload,
     });
-    console.log('THIS - ', this.state);
+    // console.log('THIS - ', this.state);
   }
 
         // <PlayerList players={this.state.players} />
   render() {
     return (
       <div>        
-        <SearchBar getPlayers={this.getPlayers} getPlayer={this.getPlayer} getPlayerData={this.getPlayerData}/>
-        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} searchedPlayerData={this.state.searchedPlayerData[0]} />
+        <SearchBar getPlayers={this.getPlayers} getPlayer={this.getPlayer} getPlayerData={this.getPlayerData} getTopWideReceiversAverage={this.getTopWideReceiversAverage}/>
+        <PlayerDisplay searchedPlayer={this.state.searchedPlayer} searchedPlayerData={this.state.searchedPlayerData} topWrAverage={this.state.topWrAverage} />
       </div>
     );
   }

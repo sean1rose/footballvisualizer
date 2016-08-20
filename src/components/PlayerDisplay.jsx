@@ -7,8 +7,10 @@ const PlayerDisplay = (props) => {
   // console.log('*playerdisplay - ', props);
   const player = props.searchedPlayer;
   const playerData = props.searchedPlayerData;
-  console.log('PLAYER - ', player);
-  console.log('props.searchedPlayerData - ', playerData);
+  const topWrAverage = props.topWrAverage;
+  // console.log('PLAYER - ', player);
+  // console.log('props.searchedPlayerData - ', playerData);
+  console.log('topWrAverage in PlayerDisplay - ', topWrAverage);
   return (
 		<div style={PlayerDisplay.styles.div}>
 			<h4 style={PlayerDisplay.styles.h}>
@@ -32,7 +34,8 @@ const PlayerDisplay = (props) => {
 
 PlayerDisplay.propTypes = {
   searchedPlayer: React.PropTypes.object.isRequired,
-  searchedPlayerData: React.PropTypes.object.isRequired
+  searchedPlayerData: React.PropTypes.object.isRequired,
+  topWrAverage: React.PropTypes.object.isRequired,
 };
 
 

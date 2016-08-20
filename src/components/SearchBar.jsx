@@ -12,6 +12,9 @@ class SearchBar extends React.Component {
       searchTerm: '',
       searchedPlayer: {},
       searchedPlayerData: {},
+      topWrAverage: {},
+      topRbAverage: {},
+      topQbAverage: {},
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -53,7 +56,31 @@ class SearchBar extends React.Component {
               });
               console.log('!!!state in search bar after call - ', this.state);
               this.props.getPlayerData(response);
+
+              // if dataObj.FantasyPosition == 'WR' -> getTopWideReceivers
+              // console.log('response - ', response);
+              switch (response.FantasyPosition){
+                case 'WR':
+                fantasyApi.getTopWideReceivers()
+                  .then(players => {
+                    var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                    console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                    this.setState({
+                      topWrAverage: topWrAverage
+                    })
+                    this.props.getTopWideReceiversAverage(topWrAverage);
+                  })
+                  break;
+                case 'RB':
+                  //
+                  break;
+                case 'QB':
+                  //
+                  break;
+              }
+
             })
+
 
 
         });
