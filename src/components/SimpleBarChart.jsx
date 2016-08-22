@@ -22,7 +22,7 @@ const SimpleBarChart = (props) => {
 };
 
 SimpleBarChart.propTypes = {
-  data: React.PropTypes.array.isRequired,
+  data: React.PropTypes.object.isRequired,
   playerName: React.PropTypes.string.isRequired,
   top8Avg: React.PropTypes.string.isRequired,
 };

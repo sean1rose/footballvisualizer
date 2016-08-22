@@ -3,7 +3,7 @@ import axios from 'axios';
 function fetch(request, callback) {
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '0302b5d54fb14225895de4f49c09b210'
+      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
     }
   };
   axios.get(request, config)
@@ -22,7 +22,7 @@ export function getPlayer(firstName, lastName) {
   const request = "https://api.fantasydata.net/v3/nfl/stats/JSON/FantasyPlayers";
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '0302b5d54fb14225895de4f49c09b210'
+      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
     }
   };
   return axios.get(request, config)
@@ -50,7 +50,7 @@ export function getPlayerData(playerId, year) {
   // const request = `https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerSeasonStatsByPlayerID/${year}/${playerId}`
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '0302b5d54fb14225895de4f49c09b210'
+      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
     }
   };
   return axios.get(request, config)
@@ -92,16 +92,27 @@ export function getTopWideReceiversAverage(topWideReceiversArray){
   var receivingYards = 0;
   var receptions = 0;
   var pointsPerTarget = 0;
+  var fantasyPointsPerGame = 0;
+  var fantasyPointsPerGamePPR = 0;
+  var fantasyPointsPPR = 0;
+  var receivingTargetsPerGame = 0;
+  var receivingYardsPerGame = 0;
+  var receptionsPerGame = 0;
   for (var i = 0; i < topWideReceiversArray.length; i++){
     const currentPlayer = topWideReceiversArray[i];
     const currentPlayerStats = currentPlayer.PlayerSeason;
     fantasyPoints += currentPlayerStats.FantasyPoints;
+    fantasyPointsPerGame += currentPlayerStats.FantasyPoints;
     fantasyPointsPPR += currentPlayerStats.FantasyPointsPPR;
+    fantasyPointsPerGamePPR += currentPlayerStats.FantasyPointsPPR;
     offensiveTouchdowns += currentPlayerStats.OffensiveTouchdowns;
     receivingTargets += currentPlayerStats.ReceivingTargets;
+    receivingTargetsPerGame += currentPlayerStats.ReceivingTargets;
     receivingTouchdowns += currentPlayerStats.ReceivingTouchdowns;
     receivingYards += currentPlayerStats.ReceivingYards;
+    receivingYardsPerGame += currentPlayerStats.ReceivingYards;
     receptions += currentPlayerStats.Receptions;
+    receptionsPerGame += currentPlayerStats.Receptions;
   }
   pointsPerTarget = fantasyPoints / receivingTargets;
   fantasyPoints = fantasyPoints / topWideReceiversArray.length;
@@ -111,14 +122,29 @@ export function getTopWideReceiversAverage(topWideReceiversArray){
   receivingTouchdowns /= topWideReceiversArray.length;
   receivingYards /= topWideReceiversArray.length;
   receptions /= topWideReceiversArray.length;
+  fantasyPointsPerGame /= topWideReceiversArray.length;
+  fantasyPointsPerGame /= 16;
+  fantasyPointsPerGamePPR /= topWideReceiversArray.length;
+  fantasyPointsPerGamePPR /= 16;
+  receivingTargetsPerGame /= topWideReceiversArray.length;
+  receivingTargetsPerGame /= 16;
+  receivingYardsPerGame /= topWideReceiversArray.length;
+  receivingYardsPerGame /= 16;
+  receptionsPerGame /= topWideReceiversArray.length;
+  receptionsPerGame /= 16;
   return {
     pointsPerTarget: pointsPerTarget,
     fantasyPoints: fantasyPoints,
+    fantasyPointsPerGame: fantasyPointsPerGame,
     fantasyPointsPPR: fantasyPointsPPR,
+    fantasyPointsPerGamePPR: fantasyPointsPerGamePPR, 
     offensiveTouchdowns: offensiveTouchdowns,
     receivingTargets: receivingTargets,
+    receivingTargetsPerGame: receivingTargetsPerGame,
     receivingTouchdowns: receivingTouchdowns,
     receivingYards: receivingYards,
-    receptions: receptions
+    receivingYardsPerGame: receivingYardsPerGame,
+    receptions: receptions,
+    receptionsPerGame: receptionsPerGame,
   }
 }
