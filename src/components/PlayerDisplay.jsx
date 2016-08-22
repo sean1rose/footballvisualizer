@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import SimpleBarChart from './SimpleBarChart.jsx';
 // console.log('recharts - ', BarChart);
 
 const PlayerDisplay = (props) => {
@@ -22,14 +23,22 @@ const PlayerDisplay = (props) => {
 	  var top8Avg = 'Top 8 Avg';
 	  var barChartData = [
 	  	// stat #1: fantasyPoints
-	  	{name: 'Fantasy Pts', [playerName]: playerSeasonStats.FantasyPoints, [top8Avg]: topWrAverage.fantasyPoints},
+	  	{name: 'Fantasy Points', [playerName]: playerSeasonStats.FantasyPoints, [top8Avg]: topWrAverage.fantasyPoints},
 	  	{name: 'Fantasy Pts PPR', [playerName]: playerSeasonStats.FantasyPointsPPR, [top8Avg]: topWrAverage.fantasyPointsPPR},
 	  	{name: 'Targets', [playerName]: playerSeasonStats.ReceivingTargets, [top8Avg]: topWrAverage.receivingTargets},
 	  	{name: 'Receptions', [playerName]: playerSeasonStats.Receptions, [top8Avg]: topWrAverage.receptions},
-	  	// {name: 'Reciving Yards', [playerName]: playerSeasonStats.ReceivingYards, [top8Avg]: topWrAverage.receivingYards},
-	  	{name: 'TDs', [playerName]: playerSeasonStats.Touchdowns, [top8Avg]: topWrAverage.offensiveTouchdowns},
+	  	{name: 'Reciving Yards', [playerName]: playerSeasonStats.ReceivingYards, [top8Avg]: topWrAverage.receivingYards},
+	  	{name: 'Touchdowns', [playerName]: playerSeasonStats.Touchdowns, [top8Avg]: topWrAverage.offensiveTouchdowns},
 	  	{name: 'Points per Target', [playerName]: playerPointsPerTarget, [top8Avg]: topWrAverage.pointsPerTarget}
 	  ];
+	  var fantasyPointsData = [barChartData[0]];
+	  var fantasyPointsPPRData = [barChartData[1]];
+	  var receptionsData = [barChartData[2]];
+	  var receivingYardsData = [barChartData[3]];
+	  var targetsData = [barChartData[4]];
+	  var tdData = [barChartData[5]];
+	  var pointsPerTargetData = [barChartData[6]];
+
 	  // console.log('#playerName - ', playerName);
 	  // console.log('#playerSeasonStats.FantasyPoints - ', playerSeasonStats.FantasyPoints);
 	  // console.log('#PLAYER - ', player);
@@ -38,7 +47,7 @@ const PlayerDisplay = (props) => {
 	  console.log('#barChartData - ', barChartData);
   }
   return (
-		<div style={PlayerDisplay.styles.div}>
+		<div>
 			<h4 style={PlayerDisplay.styles.h}>
 				Name: {player.Name}
 			</h4>
@@ -54,16 +63,15 @@ const PlayerDisplay = (props) => {
 			<h5 style={PlayerDisplay.styles.h}>
 				Player ID: {player.PlayerID}
 			</h5>
-    	<BarChart width={900} height={450} data={barChartData}
-            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-       <XAxis dataKey="name"/>
-       <YAxis/>
-       <CartesianGrid strokeDasharray="3 3"/>
-       <Tooltip/>
-       <Legend />
-       <Bar dataKey={playerName} fill="#8884d8" />
-       <Bar dataKey={top8Avg} fill="#82ca9d" />
-      </BarChart>
+			<div style={PlayerDisplay.styles.div}>
+				<SimpleBarChart data={fantasyPointsData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={fantasyPointsPPRData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={receptionsData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={receivingYardsData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={targetsData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={tdData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={pointsPerTargetData} playerName={playerName} top8Avg={top8Avg} />
+			</div>
 		</div>
   );
 };
@@ -77,7 +85,7 @@ PlayerDisplay.propTypes = {
 
 PlayerDisplay.styles = {
 	div: {
-
+		display: 'flex'
 	},
 	h: {
 		textAlign: 'center'

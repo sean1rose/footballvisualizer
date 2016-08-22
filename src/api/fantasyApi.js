@@ -61,6 +61,10 @@ export function getPlayerData(playerId, year) {
     })
 }
 
+// top 8
+// top 12
+// top 16
+// top 24
 export function getTopWideReceivers(){
   // Antonio Brown - 11056
   // Julio Jones - 13291
