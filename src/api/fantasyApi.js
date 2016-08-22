@@ -99,7 +99,7 @@ export function getTopWideReceiversAverage(topWideReceiversArray){
     receivingYards += currentPlayerStats.ReceivingYards;
     receptions += currentPlayerStats.Receptions;
   }
-  pointsPerTarget = fantasyPoints / receivingTargets / topWideReceiversArray.length;
+  pointsPerTarget = fantasyPoints / receivingTargets;
   fantasyPoints = fantasyPoints / topWideReceiversArray.length;
   fantasyPointsPPR /= topWideReceiversArray.length;
   offensiveTouchdowns /= topWideReceiversArray.length;
