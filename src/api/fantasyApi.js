@@ -74,7 +74,7 @@ export function getTop8WideReceivers(){
   // AJ Green - 12845
   // Allen Robinson - 16263
   // Jordy Nelson - 4556
-  // const topWideReceivers = [];
+  // feed function an array (w/ 20 or 30 players) and then loop thru the array and add a getPlayerData function call w/ each iteration as an argument...
   let promises = [];
   const topEightReceivers = [11056, 13291, 11667, 16263, 16389, 14986, 13460, 12845];
   topEightReceivers.forEach((singleReceiver) =>{
@@ -83,11 +83,10 @@ export function getTop8WideReceivers(){
   return axios.all(promises)
     .then(axios.spread(function(player1, player2, player3, player4, player5, player6, player7, player8){
       const topEightWideReceivers = [player1, player2, player3, player4, player5, player6, player7, player8];
-      console.log('top 8 wide receivers! - ', topEightWideReceivers);
+      console.log('$$$$$$top 8 wide receivers! - ', topEightWideReceivers);
       return topEightWideReceivers;
     }));
 
-  // how can i refactor this so that i feed it an array (w/ 20 or 30 players) and then loop thru the array and add a getPlayerData function call w/ each iteration as an argument...
   /*
   return axios.all([getPlayerData(11056), getPlayerData(13291), getPlayerData(16389), getPlayerData(14986), getPlayerData(11270), getPlayerData(12845), getPlayerData(16263), getPlayerData(4556)])
     .then(axios.spread(function(player1, player2, player3, player4, player5, player6, player7, player8){
@@ -197,5 +196,6 @@ export function getTopWideReceiversAverage(topWideReceiversArray){
     receivingYardsPerGame: receivingYardsPerGame,
     receptions: receptions,
     receptionsPerGame: receptionsPerGame,
+    numberOfPlayers: topWideReceiversArray.length,
   }
 }

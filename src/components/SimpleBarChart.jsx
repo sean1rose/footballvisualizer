@@ -15,7 +15,7 @@ const SimpleBarChart = (props) => {
        <Tooltip/>
        <Legend />
        <Bar dataKey={props.playerName} fill="#8884d8" />
-       <Bar dataKey={props.top8Avg} fill="#82ca9d" />
+       <Bar dataKey={props.topAvg} fill="#82ca9d" />
       </BarChart>
     </div>
   );
@@ -24,7 +24,7 @@ const SimpleBarChart = (props) => {
 SimpleBarChart.propTypes = {
   data: React.PropTypes.object.isRequired,
   playerName: React.PropTypes.string.isRequired,
-  top8Avg: React.PropTypes.string.isRequired,
+  topAvg: React.PropTypes.string.isRequired,
 };
 
 export default SimpleBarChart;

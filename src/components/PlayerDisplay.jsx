@@ -25,22 +25,24 @@ const PlayerDisplay = (props) => {
 	  var playerTargetsPerGame = (playerSeasonStats.ReceivingTargets / playerSeasonStats.Played);
 	  var playerYardsPerGame = (playerSeasonStats.ReceivingYards / playerSeasonStats.Played);
 	  var receptionsPerGame = (playerSeasonStats.Receptions / playerSeasonStats.Played);
-	  var top8Avg = 'Top 8 Avg';
+	  console.log('props.topWrAverage - ', props.topWrAverage);
+	  var topAvg = 'Top ' + props.topWrAverage.numberOfPlayers + ' Avg';
+	  // var topAvg = 'Top 8 Avg';
 	  
 	  var barChartData = [
 	  	// stat #1: fantasyPoints
-	  	{name: 'Fantasy Points', [playerName]: playerSeasonStats.FantasyPoints, [top8Avg]: topWrAverage.fantasyPoints},
-	  	{name: 'Fantasy Pts PPR', [playerName]: playerSeasonStats.FantasyPointsPPR, [top8Avg]: topWrAverage.fantasyPointsPPR},
-	  	{name: 'Catches', [playerName]: playerSeasonStats.Receptions, [top8Avg]: topWrAverage.receptions},
-	  	{name: 'Reciving Yards', [playerName]: playerSeasonStats.ReceivingYards, [top8Avg]: topWrAverage.receivingYards},
-	  	{name: 'Targets', [playerName]: playerSeasonStats.ReceivingTargets, [top8Avg]: topWrAverage.receivingTargets},
-	  	{name: 'Touchdowns', [playerName]: playerSeasonStats.Touchdowns, [top8Avg]: topWrAverage.offensiveTouchdowns},
-	  	{name: 'Points per Target', [playerName]: playerPointsPerTarget, [top8Avg]: topWrAverage.pointsPerTarget},
-	  	{name: 'Fantasy Pts/gm', [playerName]: playerFantasyPointsPerGame, [top8Avg]: topWrAverage.fantasyPointsPerGame},
-	  	{name: 'PPR Fantasy Pts/gm', [playerName]: playerFantasyPointsPPRPerGame, [top8Avg]: topWrAverage.fantasyPointsPerGamePPR},
-	  	{name: 'Targets/gm', [playerName]: playerTargetsPerGame, [top8Avg]: topWrAverage.receivingTargetsPerGame},
-	  	{name: 'Receiving Yds/gm', [playerName]: playerYardsPerGame, [top8Avg]: topWrAverage.receivingYardsPerGame},
-	  	{name: 'Catches/gm', [playerName]: receptionsPerGame, [top8Avg]: topWrAverage.receptionsPerGame}
+	  	{name: 'Fantasy Points', [playerName]: playerSeasonStats.FantasyPoints, [topAvg]: topWrAverage.fantasyPoints},
+	  	{name: 'Fantasy Pts PPR', [playerName]: playerSeasonStats.FantasyPointsPPR, [topAvg]: topWrAverage.fantasyPointsPPR},
+	  	{name: 'Catches', [playerName]: playerSeasonStats.Receptions, [topAvg]: topWrAverage.receptions},
+	  	{name: 'Reciving Yards', [playerName]: playerSeasonStats.ReceivingYards, [topAvg]: topWrAverage.receivingYards},
+	  	{name: 'Targets', [playerName]: playerSeasonStats.ReceivingTargets, [topAvg]: topWrAverage.receivingTargets},
+	  	{name: 'Touchdowns', [playerName]: playerSeasonStats.Touchdowns, [topAvg]: topWrAverage.offensiveTouchdowns},
+	  	{name: 'Points per Target', [playerName]: playerPointsPerTarget, [topAvg]: topWrAverage.pointsPerTarget},
+	  	{name: 'Fantasy Pts/gm', [playerName]: playerFantasyPointsPerGame, [topAvg]: topWrAverage.fantasyPointsPerGame},
+	  	{name: 'PPR Fantasy Pts/gm', [playerName]: playerFantasyPointsPPRPerGame, [topAvg]: topWrAverage.fantasyPointsPerGamePPR},
+	  	{name: 'Targets/gm', [playerName]: playerTargetsPerGame, [topAvg]: topWrAverage.receivingTargetsPerGame},
+	  	{name: 'Receiving Yds/gm', [playerName]: playerYardsPerGame, [topAvg]: topWrAverage.receivingYardsPerGame},
+	  	{name: 'Catches/gm', [playerName]: receptionsPerGame, [topAvg]: topWrAverage.receptionsPerGame}
 	  ];
 	  
 	  var fantasyPointsData = [barChartData[0]];
@@ -95,18 +97,18 @@ const PlayerDisplay = (props) => {
 			</h5>
 			<div style={PlayerDisplay.styles.div}>
 
-				<SimpleBarChart data={fantasyPointsData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={fantasyPointsPerGameData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={fantasyPointsPPRData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={fantasyPointsPPRPerGameData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={receptionsData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={receptionsPerGameData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={receivingYardsData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={yardsPerGameData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={targetsData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={targetsPerGameData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={tdData} playerName={playerName} top8Avg={top8Avg} />
-				<SimpleBarChart data={pointsPerTargetData} playerName={playerName} top8Avg={top8Avg} />
+				<SimpleBarChart data={fantasyPointsData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={fantasyPointsPerGameData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={fantasyPointsPPRData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={fantasyPointsPPRPerGameData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={receptionsData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={receptionsPerGameData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={receivingYardsData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={yardsPerGameData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={targetsData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={targetsPerGameData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={tdData} playerName={playerName} topAvg={topAvg} />
+				<SimpleBarChart data={pointsPerTargetData} playerName={playerName} topAvg={topAvg} />
 
 			</div>
 		</div>

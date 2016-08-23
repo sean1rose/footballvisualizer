@@ -15,9 +15,17 @@ class SearchBar extends React.Component {
       topWrAverage: {},
       topRbAverage: {},
       topQbAverage: {},
+      value: '8',
     };
+    this.change = this.change.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  change(event) {
+    this.setState({
+      value: event.target.value,
+    });
   }
 
   handleInputChange(event) {
@@ -33,7 +41,7 @@ class SearchBar extends React.Component {
       console.log('search - ', this.state.searchTerm);
       const firstName = this.state.searchTerm.split(" ")[0].toLowerCase();
       const lastName = this.state.searchTerm.split(" ")[1].toLowerCase();
-      console.log(firstName + lastName);
+      // console.log('ENTER - this.state - ', this.state);
       this.props.getPlayers();
       // split name
 
@@ -61,15 +69,41 @@ class SearchBar extends React.Component {
               // console.log('response - ', response);
               switch (response.FantasyPosition){
                 case 'WR':
-                fantasyApi.getTop8WideReceivers()
-                  .then(players => {
-                    var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
-                    console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
-                    this.setState({
-                      topWrAverage: topWrAverage
-                    })
-                    this.props.getTopWideReceiversAverage(topWrAverage);
-                  })
+                switch (this.state.value){
+                  case '8':
+                    fantasyApi.getTop8WideReceivers()
+                      .then(players => {
+                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                        this.setState({
+                          topWrAverage: topWrAverage
+                        })
+                        this.props.getTopWideReceiversAverage(topWrAverage);
+                      });
+                    break;
+                  case '20':
+                    fantasyApi.getTop20WideReceivers()
+                      .then(players => {
+                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                        this.setState({
+                          topWrAverage: topWrAverage
+                        })
+                        this.props.getTopWideReceiversAverage(topWrAverage);
+                      });
+                    break;
+                  case '30':
+                    fantasyApi.getTop30WideReceivers()
+                      .then(players => {
+                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                        this.setState({
+                          topWrAverage: topWrAverage
+                        })
+                        this.props.getTopWideReceiversAverage(topWrAverage);
+                      });
+                    break
+                }
                   break;
                 case 'RB':
                   //
@@ -98,6 +132,11 @@ class SearchBar extends React.Component {
           onKeyPress={this.handleKeyPress}
           style={SearchBar.styles.input}
         />
+          <select onChange={this.change} value={this.state.value}>
+            <option value="8">vs. Top 8 Wide Receivers</option>
+            <option value="20">vs. Top 20 Wide Receivers</option>
+            <option value="30">vs. Top 30 Wide Receivers</option>
+          </select>
       </div>
     );
   }
