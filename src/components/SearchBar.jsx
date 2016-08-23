@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
               // console.log('response - ', response);
               switch (response.FantasyPosition){
                 case 'WR':
-                fantasyApi.getTopWideReceivers()
+                fantasyApi.getTop30WideReceivers()
                   .then(players => {
                     var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
                     console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
