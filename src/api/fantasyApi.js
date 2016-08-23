@@ -85,7 +85,7 @@ export function getTop8WideReceivers(){
       const topEightWideReceivers = [player1, player2, player3, player4, player5, player6, player7, player8];
       console.log('top 8 wide receivers! - ', topEightWideReceivers);
       return topEightWideReceivers;
-    }
+    }));
 
   // how can i refactor this so that i feed it an array (w/ 20 or 30 players) and then loop thru the array and add a getPlayerData function call w/ each iteration as an argument...
   /*
