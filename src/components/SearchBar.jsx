@@ -20,9 +20,11 @@ class SearchBar extends React.Component {
     this.change = this.change.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.callFantasyApi = this.callFantasyApi.bind(this);
   }
 
   change(event) {
+    this.callFantasyApi(event.target.value);
     this.setState({
       value: event.target.value,
     });
@@ -33,21 +35,19 @@ class SearchBar extends React.Component {
     this.setState({
       searchTerm: event.target.value,
     });
+    if (this.state.searchTerm != ''){
+      // need to validate
+      this.callFantasyApi();
+    }
   }
 
+  callFantasyApi(){
+    const first = this.state.searchTerm.split(" ")[0].toLowerCase();
+    const last = this.state.searchTerm.split(" ")[1].toLowerCase();
+    // console.log('ENTER - this.state - ', this.state);
+    this.props.getPlayers();
 
-  handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      console.log('search - ', this.state.searchTerm);
-      const firstName = this.state.searchTerm.split(" ")[0].toLowerCase();
-      const lastName = this.state.searchTerm.split(" ")[1].toLowerCase();
-      // console.log('ENTER - this.state - ', this.state);
-      this.props.getPlayers();
-      // split name
-
-      // fantasyApi.getPlayers(this.processPlayers);
-
-      fantasyApi.getPlayer(firstName, lastName)
+     fantasyApi.getPlayer(first, last)
         .then(dataObj => {
           // set player obj as state
           this.setState({
@@ -114,10 +114,19 @@ class SearchBar extends React.Component {
               }
 
             })
-
-
-
         });
+  }
+
+  handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      console.log('search - ', this.state.searchTerm);
+      const firstName = this.state.searchTerm.split(" ")[0].toLowerCase();
+      const lastName = this.state.searchTerm.split(" ")[1].toLowerCase();
+      // console.log('ENTER - this.state - ', this.state);
+      this.props.getPlayers();
+      // split name
+
+      this.callFantasyApi();
 
     }
   }
@@ -126,7 +135,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div style={SearchBar.styles.div}>
-        <h3>Search for a Player</h3>
+        <h3>Compare a Player</h3>
         <input
           onChange={this.handleInputChange}
           onKeyPress={this.handleKeyPress}

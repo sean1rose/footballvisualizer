@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 function fetch(request, callback) {
+  // 440dcc431d9341e3915cae86b0afa30c
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
+      'Ocp-Apim-Subscription-Key': '3753e1370eb84ce1bf522a491c2c0653'
     }
   };
   axios.get(request, config)
@@ -22,7 +23,7 @@ export function getPlayer(firstName, lastName) {
   const request = "https://api.fantasydata.net/v3/nfl/stats/JSON/FantasyPlayers";
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
+      'Ocp-Apim-Subscription-Key': '3753e1370eb84ce1bf522a491c2c0653'
     }
   };
   return axios.get(request, config)
@@ -50,7 +51,7 @@ export function getPlayerData(playerId, year) {
   // const request = `https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerSeasonStatsByPlayerID/${year}/${playerId}`
   const config = {
     headers: {
-      'Ocp-Apim-Subscription-Key': '440dcc431d9341e3915cae86b0afa30c'
+      'Ocp-Apim-Subscription-Key': '3753e1370eb84ce1bf522a491c2c0653'
     }
   };
   return axios.get(request, config)
