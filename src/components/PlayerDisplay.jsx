@@ -80,21 +80,21 @@ const PlayerDisplay = (props) => {
   }
   return (
 		<div>
-			<h4 style={PlayerDisplay.styles.h}>
-				Name: {player.Name}
-			</h4>
-			<h5 style={PlayerDisplay.styles.h}>
-				Position: {player.Position}
-			</h5>
-			<h5 style={PlayerDisplay.styles.h}>
-				ADP: {player.AverageDraftPosition}
-			</h5>
-			<h5 style={PlayerDisplay.styles.h}>
-				Projected Pts: {player.ProjectedFantasyPoints}
-			</h5>
-			<h5 style={PlayerDisplay.styles.h}>
-				Player ID: {player.PlayerID}
-			</h5>
+			<div style={PlayerDisplay.styles.container}>
+				<img style={PlayerDisplay.styles.i} src={props.searchedPlayerData.PhotoUrl} />
+				<h4 style={PlayerDisplay.styles.h}>
+					{player.Name}
+				</h4>
+				<h5 style={PlayerDisplay.styles.h}>
+					Position: {player.Position}
+				</h5>
+				<h5 style={PlayerDisplay.styles.h}>
+					ADP: {player.AverageDraftPosition}
+				</h5>
+				<h5 style={PlayerDisplay.styles.h}>
+					Projected Pts: {player.ProjectedFantasyPoints}
+				</h5>
+			</div>
 			<div style={PlayerDisplay.styles.div}>
 
 				<SimpleBarChart data={fantasyPointsData} playerName={playerName} topAvg={topAvg} />
@@ -123,11 +123,19 @@ PlayerDisplay.propTypes = {
 
 
 PlayerDisplay.styles = {
+	container: {
+		marginLeft: '40%',
+		marginTop: '1%'
+	},
 	div: {
 		display: 'flex'
 	},
+	i: {
+		float: 'left',
+		marginRight: '3%'
+	},
 	h: {
-		textAlign: 'center'
+		// textAlign: 'center'
 	}
 }
 

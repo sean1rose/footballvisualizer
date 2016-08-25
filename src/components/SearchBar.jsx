@@ -141,7 +141,7 @@ class SearchBar extends React.Component {
           onKeyPress={this.handleKeyPress}
           style={SearchBar.styles.input}
         />
-          <select onChange={this.change} value={this.state.value}>
+          <select style={SearchBar.styles.select} onChange={this.change} value={this.state.value}>
             <option value="8">vs. Top 8 Wide Receivers</option>
             <option value="20">vs. Top 20 Wide Receivers</option>
             <option value="30">vs. Top 30 Wide Receivers</option>
@@ -164,6 +164,9 @@ SearchBar.styles = {
   input: {
     width: '60%',
   },
+  select: {
+    marginLeft: '10px',
+  }
 };
 
 export default SearchBar;
