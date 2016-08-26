@@ -62,6 +62,46 @@ export function getPlayerData(playerId, year) {
     })
 }
 
+export function getTop8RunningBacks() {
+  const topEightRB = [16524, 4807, 14385, 7580, 16771, 13791, 16847, 12239];
+  let promises = [];
+  topEightRB.forEach((singleRB) => {
+    promises.push(getPlayerData(singleRB));
+  });
+  return axios.all(promises)
+    .then(axios.spread((player1, player2, player3, player4, player5, player6, player7, player8) => {
+      const topEightRunningBacks = [player1, player2, player3, player4, player5, player6, player7, player8];
+      return topEightRunningBacks;
+    }));
+}
+
+export function getTop20RunningBacks(){
+  const topTwentyRB = [16524, 4807, 14385, 7580, 16771, 13791, 16847, 12239, 2699, 15071, 12317, 5820, 8066, 16112, 13337, 5451, 11932, 13124, 14046, 8649];
+  let promises = [];
+  topTwentyRB.forEach((singleRB) => {
+    promises.push(getPlayerData(singleRB));
+  });
+  return axios.all(promises)
+    .then(axios.spread((player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18,player19,player20) => {
+      const topTwentyRunningBacks = [player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18,player19,player20];
+      return topTwentyRunningBacks;
+    }));
+}
+
+export function getTop30RunningBacks(){
+  const topThirtyRB = [16524, 4807, 14385, 7580, 16771, 13791, 16847, 12239, 2699, 15071, 12317, 5820, 8066, 16112, 13337, 5451, 11932, 13124, 14046, 8649, 14916, 16609, 16867, 12506, 15138, 16797, 16127, 17050, 12296, 15020];
+  let promises = [];
+  topThirtyRB.forEach((singleRB) => {
+    promises.push(getPlayerData(singleRB));
+  });
+  return axios.all(promises)
+    .then(axios.spread((player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18,player19,player20,player21,player22,player23,player24,player25,player26,player27,player28,player29,player30) => {
+      const topThirtyRunningBacks = [player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11,player12,player13,player14,player15,player16,player17,player18,player19,player20,player21,player22,player23,player24,player25,player26,player27,player28,player29,player30];
+      return topThirtyRunningBacks;
+    }));
+}
+
+
 // top 8
 // top 12
 // top 16
@@ -78,11 +118,11 @@ export function getTop8WideReceivers(){
   // feed function an array (w/ 20 or 30 players) and then loop thru the array and add a getPlayerData function call w/ each iteration as an argument...
   let promises = [];
   const topEightReceivers = [11056, 13291, 11667, 16263, 16389, 14986, 13460, 12845];
-  topEightReceivers.forEach((singleReceiver) =>{
+  topEightReceivers.forEach((singleReceiver) => {
     promises.push(getPlayerData(singleReceiver));
   });
   return axios.all(promises)
-    .then(axios.spread(function(player1, player2, player3, player4, player5, player6, player7, player8){
+    .then(axios.spread((player1, player2, player3, player4, player5, player6, player7, player8) => {
       const topEightWideReceivers = [player1, player2, player3, player4, player5, player6, player7, player8];
       console.log('$$$$$$top 8 wide receivers! - ', topEightWideReceivers);
       return topEightWideReceivers;

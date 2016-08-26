@@ -26,7 +26,8 @@ const PlayerDisplay = (props) => {
 	  var playerYardsPerGame = (playerSeasonStats.ReceivingYards / playerSeasonStats.Played);
 	  var receptionsPerGame = (playerSeasonStats.Receptions / playerSeasonStats.Played);
 	  console.log('props.topWrAverage - ', props.topWrAverage);
-	  var topAvg = 'Top ' + props.topWrAverage.numberOfPlayers + ' Avg';
+	  var position = props.searchedPlayerData.FantasyPosition == "WR" ? " WR " : props.searchedPlayerData.FantasyPosition == "RB" ? " RB " : props.searchedPlayerData.FantasyPosition == "QB" ? " QB " : '';
+	  var topAvg = 'Top ' + props.topWrAverage.numberOfPlayers + position + 'Avg';
 	  // var topAvg = 'Top 8 Avg';
 	  
 	  var barChartData = [
@@ -93,6 +94,9 @@ const PlayerDisplay = (props) => {
 				</h5>
 				<h5 style={PlayerDisplay.styles.h}>
 					Projected Pts: {player.ProjectedFantasyPoints}
+				</h5>
+				<h5>
+				PlayerID: {player.PlayerID}
 				</h5>
 			</div>
 			<div style={PlayerDisplay.styles.div}>

@@ -8,6 +8,8 @@ import * as fantasyApi from './api/fantasyApi';
 
 class App extends React.Component {
   constructor() {
+    // ***constructor describes what happens when an element of this component is first created
+    // super passes whatever arguments the constructor has to the constructor of the original React.Component class
     super();
     this.state = ({
       players: [],
@@ -65,6 +67,7 @@ class App extends React.Component {
   }
 
         // <PlayerList players={this.state.players} />
+  // render is what should be displayed on the screen for that element
   render() {
     return (
       <div>        

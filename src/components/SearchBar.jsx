@@ -24,10 +24,11 @@ class SearchBar extends React.Component {
   }
 
   change(event) {
-    this.callFantasyApi(event.target.value);
     this.setState({
       value: event.target.value,
     });
+    if (this.state.searchTerm != '')
+      this.callFantasyApi();
   }
 
   handleInputChange(event) {
@@ -35,10 +36,6 @@ class SearchBar extends React.Component {
     this.setState({
       searchTerm: event.target.value,
     });
-    if (this.state.searchTerm != ''){
-      // need to validate
-      this.callFantasyApi();
-    }
   }
 
   callFantasyApi(){
@@ -69,43 +66,78 @@ class SearchBar extends React.Component {
               // console.log('response - ', response);
               switch (response.FantasyPosition){
                 case 'WR':
-                switch (this.state.value){
-                  case '8':
-                    fantasyApi.getTop8WideReceivers()
-                      .then(players => {
-                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
-                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
-                        this.setState({
-                          topWrAverage: topWrAverage
-                        })
-                        this.props.getTopWideReceiversAverage(topWrAverage);
-                      });
-                    break;
-                  case '20':
-                    fantasyApi.getTop20WideReceivers()
-                      .then(players => {
-                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
-                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
-                        this.setState({
-                          topWrAverage: topWrAverage
-                        })
-                        this.props.getTopWideReceiversAverage(topWrAverage);
-                      });
-                    break;
-                  case '30':
-                    fantasyApi.getTop30WideReceivers()
-                      .then(players => {
-                        var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
-                        console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
-                        this.setState({
-                          topWrAverage: topWrAverage
-                        })
-                        this.props.getTopWideReceiversAverage(topWrAverage);
-                      });
-                    break
-                }
+                  switch (this.state.value){
+                    case '8':
+                      fantasyApi.getTop8WideReceivers()
+                        .then(players => {
+                          var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                          console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                          this.setState({
+                            topWrAverage: topWrAverage
+                          })
+                          this.props.getTopWideReceiversAverage(topWrAverage);
+                        });
+                      break;
+                    case '20':
+                      fantasyApi.getTop20WideReceivers()
+                        .then(players => {
+                          var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                          console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                          this.setState({
+                            topWrAverage: topWrAverage
+                          })
+                          this.props.getTopWideReceiversAverage(topWrAverage);
+                        });
+                      break;
+                    case '30':
+                      fantasyApi.getTop30WideReceivers()
+                        .then(players => {
+                          var topWrAverage = fantasyApi.getTopWideReceiversAverage(players);
+                          console.log('------------topWideRecivers AVERAGE! - ', topWrAverage);
+                          this.setState({
+                            topWrAverage: topWrAverage
+                          })
+                          this.props.getTopWideReceiversAverage(topWrAverage);
+                        });
+                      break
+                  }
                   break;
                 case 'RB':
+                  switch(this.state.value){
+                    case '8':
+                      fantasyApi.getTop8RunningBacks()
+                        .then(players => {
+                          console.log("GOT TOP 8 RBS! - ", players);
+                          // var topRBAverage = fantasyApi.getTopRunningBacksAverage(players);
+                          // this.setState({
+                          //   topRbAverage: topRbAverage
+                          // });
+                          // this.props.getTopRunningBacksAverage(topRbAverage);
+                        })
+                      break;
+                    case '20':
+                      fantasyApi.getTop20RunningBacks()
+                        .then(players => {
+                          console.log("GOT TOP 20 RBS! - ", players);
+                          // var topRBAverage = fantasyApi.getTopRunningBacksAverage(players);
+                          // this.setState({
+                          //   topRbAverage: topRbAverage
+                          // });
+                          // this.props.getTopRunningBacksAverage(topRbAverage);
+                        })
+                      break;
+                    case '30':
+                      fantasyApi.getTop30RunningBacks()
+                        .then(players => {
+                          console.log("GOT TOP 30 RBS! - ", players);
+                          // var topRBAverage = fantasyApi.getTopRunningBacksAverage(players);
+                          // this.setState({
+                          //   topRbAverage: topRbAverage
+                          // });
+                          // this.props.getTopRunningBacksAverage(topRbAverage);
+                        })
+                      break;
+                  }
                   //
                   break;
                 case 'QB':
@@ -142,9 +174,9 @@ class SearchBar extends React.Component {
           style={SearchBar.styles.input}
         />
           <select style={SearchBar.styles.select} onChange={this.change} value={this.state.value}>
-            <option value="8">vs. Top 8 Wide Receivers</option>
-            <option value="20">vs. Top 20 Wide Receivers</option>
-            <option value="30">vs. Top 30 Wide Receivers</option>
+            <option value="8">vs. Top 8</option>
+            <option value="20">vs. Top 20</option>
+            <option value="30">vs. Top 30</option>
           </select>
       </div>
     );
